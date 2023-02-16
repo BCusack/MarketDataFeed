@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/market-data-feed",
             "index": "src/index.html",
@@ -25,7 +25,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -51,7 +52,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -87,12 +94,26 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "MarketDataFeed:build:production",
+            "firebaseProject": "market-data-dc3fa",
+            "firebaseHostingSite": "market-data-dc3fa"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "784282b2-1f52-45ed-8cd7-790fa40bd312"
   }
 }

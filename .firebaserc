@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "market-data-dc3fa": {
+      "hosting": {
+        "MarketDataFeed": [
+          "market-data-dc3fa"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "market-data-dc3fa"
+  }
+}
