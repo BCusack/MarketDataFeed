@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, retry, throwError } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -19,7 +19,13 @@ export class DataserviceService {
    * get all symbols and candles from the period
    * @returns respose object from request header
    */
-  get_all() {
-    return this.http.get<any[]>(this.url);
+  get_all(): Observable<any[]> {
+    return this.http.get<any[]>(this.url)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          const errorMessage = `Error occurred while retrieving data: ${error.message}`;
+          return throwError(() => errorMessage);
+        })
+      );
   }
 }

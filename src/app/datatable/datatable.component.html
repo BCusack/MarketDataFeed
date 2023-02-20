@@ -1,1 +1,36 @@
-<p>data table</p>
+<div class="container  pt-0 pb-0 mt-0 mb-0">
+  <table mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8">
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell
+          *matHeaderCellDef> Symbol </th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+    <ng-container matColumnDef="change">
+      <th mat-header-cell
+          *matHeaderCellDef> change </th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.change}} </td>
+    </ng-container>
+    <ng-container matColumnDef="abs_change">
+      <th mat-header-cell
+          *matHeaderCellDef> Abs Change </th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.abs_change}} </td>
+    </ng-container>
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell
+          *matHeaderCellDef> Volume </th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
